@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos de alumnos</title>
+</head>
+
+<body>
+
+    <h1>Datos de alumnos</h1>
+
+    <button onclick="location.href='index.html'">
+        Volver
+    </button>
+    
+    <div id="resultado"></div>
+
+    <script>
+        fetch("/api/datos")
+            .then(response => response.json())
+            .then(datos => {
+
+                let html = "<table border='1'>";
+
+                html += "<tr>";
+                html += "<th>ID</th>";
+                html += "<th>Nombre</th>";
+                html += "<th>Apellido</th>";
+                html += "</tr>";
+
+                datos.forEach(dato => {
+                    html += "<tr>";
+                    html += "<td>" + dato.id + "</td>";
+                    html += "<td>" + dato.nombre + "</td>";
+                    html += "<td>" + dato.apellido + "</td>";
+                    html += "</tr>";
+                });
+
+                html += "</table>";
+
+                document.getElementById("resultado").innerHTML = html;
+            });
+    </script>
+
+</body>
+
+</html><!--  -->
